@@ -4,6 +4,15 @@ error_reporting(6135); // errors and warnings
 include dirname(__FILE__) . "/adminer/include/version.inc.php";
 include dirname(__FILE__) . "/externals/JsShrink/jsShrink.php";
 
+if (!function_exists('each')) {
+	function each(&$arr) {
+		$key = key($arr);
+		$result = ($key === null) ? false : [$key, current($arr), 'key' => $key, 'value' => current($arr)];
+		next($arr);
+		return $result;
+	}
+}
+
 function add_apo_slashes($s) {
 	return addcslashes($s, "\\'");
 }

@@ -56,6 +56,15 @@ function number_type() {
 	return '((?<!o)int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
 }
 
+if (!function_exists('each')) {
+	function each(&$arr) {
+		$key = key($arr);
+		$result = ($key === null) ? false : [$key, current($arr), 'key' => $key, 'value' => current($arr)];
+		next($arr);
+		return $result;
+	}
+}
+
 /** Disable magic_quotes_gpc
 * @param array e.g. (&$_GET, &$_POST, &$_COOKIE)
 * @param bool whether to leave values as is
